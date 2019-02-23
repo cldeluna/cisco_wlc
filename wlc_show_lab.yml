@@ -1,0 +1,38 @@
+---
+###############################################################################
+# This playbook utilizes the aireos_command ansible module to execute a set of
+# show commands against the cisco wireless controllers defined in the [wlc]
+# group within the hosts file.   The command executes a list of show commands
+# and saves the result of each command into the output variable.
+#
+# The output variable is then displayed as part of the playbook run
+#
+# The contents of the output variable are then saved using two different methods.
+# device.output has the raw output format which is a JSON data structure
+# device.ouput_lines saves the output as a list of lists
+###############################################################################
+- name: Starter Playbook for WLC show commands suitable for Lab Testing
+  hosts: wlc
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Eecute Show Commands on WLCs using the aireos_command Ansible Module
+      aireos_command:
+        username: admin
+        password: Cisco123
+        commands:
+          - show sysinfo
+          - show interface summary
+          - show license summary
+          - show wlan summary
+          - show inventory
+          - show ap inventory all
+          - show ap summary
+          - show mobility summary
+          - show run-config commands
+      register: output
+    - debug: var=output
+
+    - local_action: copy content="{{ output }}" dest="./logs/{{ inventory_hostname }}.output"
+    - local_action: copy content="{{ output.stdout_lines }}" dest="./logs/{{ inventory_hostname }}.output_lines"

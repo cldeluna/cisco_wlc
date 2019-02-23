@@ -1,0 +1,69 @@
+---
+###############################################################################
+# This playbook utilizes the aireos_command ansible module to execute a set of
+# show commands against the cisco wireless controllers defined as part of the
+# execution command line argument.  This playbook is intended to be interactive.
+#
+# Note the comma after the ip or hostname is essential to proper execution.
+#
+# This playbook acts on the "all" group and utilizes a bit of a "hack" in the
+# execution command line argument to execute the playbook on a list of target
+# devices.  Note that the target WLC must be defined within the hosts file.
+#
+# Running this command, if not executed properly, may run the playbook on all
+# devices in the hosts file so GREAT CARE MUST BE TAKEN.
+#
+# This playbook also illustrates the use of command line options to pass the
+# -i FQDN of target hose (with trailing comma)
+# -u to pass the username
+# -k to interactively prompt for the password
+#
+# The command executes a list of show commands
+# using with_items and saves the result of each command into the output variable.
+#
+# The with_items construct results in a dictionary data structure that could be
+# manipulated more precisely in follow on actions.  Rather then reference an
+# element in a list by number, the exact data can be reference by a key in a
+# dictionary.
+#
+# The with_items construc also renders the display a bit more descriptive.
+#
+# The output variable is then displayed as part of the playbook run only if
+#
+# The contents of the output variable are then saved using a Jinja filter that
+# renders the output as "pretty" JSON
+#
+# EXECUTION:
+# ansible-playbook -i 10.1.10.123 -u admin -k wlc_show_interactive.yml
+#
+# To display the output variable run the playbook with a single v
+# ansible-playbook -i 10.1.10.123 -u admin -k wlc_show_interactive.yml -v
+###############################################################################
+
+- hosts: all
+  connection: local
+  gather_facts: False
+
+  tasks:
+  - debug: msg="Executing show commands on target {{ inventory_hostname}}"
+  - aireos_command:
+      commands:
+        - "{{ item }}"
+    register: output
+    with_items:
+        - show sysinfo
+        - show interface summary
+        - show license summary
+        - show wlan summary
+        - show inventory
+        - show ap inventory all
+        - show ap summary
+        - show mobility summary
+        - show run-config commands
+
+  - name: Debug to show output contents only when debugging
+    debug:
+      var: output
+      verbosity: 1
+
+  - local_action: copy content="{{ output | to_nice_json }}" dest="./logs/{{ inventory_hostname }}.json"

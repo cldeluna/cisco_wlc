@@ -1,0 +1,10 @@
+*.log
+*.pyc
+*.backup
+this*
+*ENV*
+.DS*
+.idea*
+__*
+*.show
+*.retry

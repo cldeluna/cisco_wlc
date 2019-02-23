@@ -1,0 +1,5 @@
+[local]
+localhost ansible_connection=local
+
+[cisco_wlc]
+artic-wlc01 ansible_host=10.1.10.123
