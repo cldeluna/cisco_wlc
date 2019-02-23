@@ -12,7 +12,7 @@
 # device.ouput_lines saves the output as a list of lists
 ###############################################################################
 - name: Starter Playbook for WLC show commands suitable for Lab Testing
-  hosts: wlc
+  hosts: cisco_wlc
   connection: local
   gather_facts: False
 
