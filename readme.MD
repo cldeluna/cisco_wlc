@@ -100,7 +100,6 @@ localhost ansible_connection=local
 
 [cisco_wlc]
 artic-wlc01 ansible_host=10.1.10.123
-root@0bd4731cb725:/ansible/cisco_wlc#
 ```
 
 >  # ansible-playbook -i hosts wlc\_show\_json_vault.yml --ask-vault-pass
