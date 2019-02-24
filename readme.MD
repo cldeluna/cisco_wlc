@@ -10,6 +10,60 @@ The playbooks contained within this repository are examples only.  They are inte
 These playbooks utilize the [**aireos_command**](https://docs.ansible.com/ansible/2.4/aireos_command_module.html) module which to date still requires the provider construct.  
 
 
+### Ansible Vault ###
+
+The wlc_show_json_vault.yml playbook incorporates an include file which is an encrypted file containing the required user name and password.  The sample creds.yml file was encrypted using the 'ansible-vault encrypt <filename>' command and given then ansible vault password of 'Cisco123'.  
+
+The only modifications to the original json playbook are:
+
+An additional task which include the new encrypted creds.yml file (which contains the variables v_username and v_password).
+An update to the username and password arguments which now reference the v_ variables rather than the actual values.
+
+```
+  tasks:
+    - name: Get Vault Variables
+      include_vars: ./group_vars/creds.yml
+    - name: Execute Show Commands on WLCs
+      aireos_command:
+        username: "{{ v_username }}"
+        password: "{{ v_password }}"
+```
+
+EXECUTION:
+```ansible-playbook -i hosts wlc_show_json_vault.yml --ask-vault-pass```
+
+
+#### Vault Example ####
+
+```
+root@0bd4731cb725:/ansible/cisco_wlc# ls
+ansible.cfg  ansible.log  group_vars  hosts  labv.yml  logs  readme.MD  wlc_show_interactive.yml  wlc_show_json.yml  
+wlc_show_json_vault.yml  wlc_show_lab.yml
+
+root@0bd4731cb725:/ansible/cisco_wlc# cd group_vars/
+
+root@0bd4731cb725:/ansible/cisco_wlc/group_vars# ls
+creds.yml
+
+root@0bd4731cb725:/ansible/cisco_wlc/group_vars# cat creds.yml
+$ANSIBLE_VAULT;1.1;AES256
+32336235323861313265393432343839613631643066666134643765626632623532396434376234
+6431336535666536366436316336326335626463316665390a323536313631363032656135313761
+66643239306261653666393236323361646431653737376464346364656139633333623435353431
+3833333261386565300a356439373437623161653362316163343734326536356662313065616234
+35323466383963326138663463653239343332333364616534653933396535633962333065386232
+3866346332626631633537313338626264333331363962663538
+
+root@0bd4731cb725:/ansible/cisco_wlc/group_vars# ansible-vault view creds.yml
+Vault password:
+v_username: admin
+v_password: Cisco123
+root@0bd4731cb725:/ansible/cisco_wlc/group_vars# history | grep ansible-vault
+  204  ansible-vault encrypt creds.yml
+  205  ansible-vault view creds.yml
+
+```
+
 
 ### Environment ##
 

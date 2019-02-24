@@ -1,7 +1,7 @@
 ---
 ###############################################################################
 # This playbook utilizes the aireos_command ansible module to execute a set of
-# show commands against the cisco wireless controllers defined in the [wlc]
+# show commands against the cisco wireless controllers defined in the [cisco_wlc]
 # group within the hosts file.   The command executes a list of show commands
 # and saves the result of each command into the output variable.
 #

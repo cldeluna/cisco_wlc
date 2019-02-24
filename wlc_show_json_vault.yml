@@ -1,7 +1,7 @@
 ---
 ###############################################################################
 # This playbook utilizes the aireos_command ansible module to execute a set of
-# show commands against the cisco wireless controllers defined in the [wlc]
+# show commands against the cisco wireless controllers defined in the [cisco_wlc]
 # group within the hosts file.   The command executes a list of show commands
 # using with_items and saves the result of each command into the output variable.
 #
@@ -18,10 +18,10 @@
 # renders the output as "pretty" JSON
 #
 # EXECUTION:
-# ansible-playbook -i hosts wlc_show_json.yml
+# ansible-playbook -i hosts wlc_show_json_vault.yml --ask-vault-pass
 #
 # To display the output variable run the playbook with a single v
-# ansible-playbook -i hosts wlc_show_json.yml -v
+# ansible-playbook -i hosts wlc_show_json_vault.yml --ask-vault-pass -v
 ###############################################################################
 
 - hosts: cisco_wlc
@@ -49,7 +49,7 @@
           - show mobility summary
           - show run-config commands
 
-    - name: Debug to show output contents only when debugging
+    - name: Debug with -v to show output contents only when debugging
       debug:
         var: output
         verbosity: 1
