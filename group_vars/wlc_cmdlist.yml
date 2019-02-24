@@ -1,6 +1,17 @@
 wlc_show_commands:
-  - show time
+# Original Show Command List
   - show sysinfo
+  - show interface summary
+  - show license summary
+  - show wlan summary
+  - show inventory
+  - show ap inventory all
+  - show ap summary
+  - show mobility summary
+  - show run-config commands
+# AP BUG WLC Command List
+  - show time
+#  - show sysinfo
   - show client state summary
   - show queue-info
   - show radius queue summary
