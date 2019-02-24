@@ -34,10 +34,12 @@
 # renders the output as "pretty" JSON
 #
 # EXECUTION:
-# ansible-playbook -i 10.1.10.123 -u admin -k wlc_show_interactive.yml
+# ansible-playbook -i 10.1.10.123, -u admin -k wlc_show_interactive.yml
 #
 # To display the output variable run the playbook with a single v
-# ansible-playbook -i 10.1.10.123 -u admin -k wlc_show_interactive.yml -v
+# ansible-playbook -i 10.1.10.123, -u admin -k wlc_show_interactive.yml -v
+#
+# Reference: https://gist.github.com/lilongen/ebc11f69ae2ba48971c77527d5c02fab
 ###############################################################################
 
 - hosts: all
