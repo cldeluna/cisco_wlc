@@ -8,8 +8,8 @@ wlc_show_commands:
   - show arp stats
   - show coredump summary
   - show process cpu
-#  - show memory summary
+  - show memory summary
 #  - show imm chassis fan
-  - show imm chassis temperature
+#  - show imm chassis temperature
   - show ap uptime
   - show ap crash-file
