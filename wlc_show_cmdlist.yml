@@ -46,7 +46,7 @@
       register: output
       with_items:
           - "{{ wlc_show_commands }}"
-
+      ignore_errors: yes
 
     - name: Debug with -v to show output contents only when debugging
       debug:
