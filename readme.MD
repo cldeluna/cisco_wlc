@@ -41,7 +41,7 @@ The wlc_show_json_vault.yml playbook incorporates an include file which is an en
 
 The only modifications to the original json playbook are:
 
-An additional task which include the new encrypted creds.yml file (which contains the variables v_username and v_password).
+An additional task which includes the new encrypted creds.yml file (which contains the variables v_username and v_password).
 An update to the username and password arguments which now reference the v_ variables rather than the actual values.
 
 ```
