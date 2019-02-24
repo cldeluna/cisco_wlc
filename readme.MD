@@ -1,31 +1,35 @@
 
 ## Sample Ansible Playbooks for Cisco Wireless Controller Discovery ##
 
-The playbooks contained within this repository are examples only.  They are intended to illustrate some basic usage as well as the evolution of a playbook from 
+The playbooks contained within this repository are examples only.  They are intended to illustrate some basic usage as well as the evolution of a playbook from:
 - an initial playbook with embedded credentials suitable for a lab environment
 - a playbook more suitable for a production environment which uses constructs which anticipate the structured date returned and how it might be used at a later time
 - a playbook more suitable for a production environment which uses Ansible Vault to protect credentials (Note: this is an interactive playbook)
 - an interactive playbook to showcase including credentials as part of the command line and limiting the target hosts
 
+These playbooks execute a set of show commands on the designated controllers and save the output to a file.
+
 ```
-root@0bd4731cb725:/ansible/cisco_wlc# ls -al
-total 620
-drwxr-xr-x 15 root root    510 Feb 24 01:05 .
-drwxr-xr-x  8 root root    272 Feb 23 23:41 ..
-drwxr-xr-x 15 root root    510 Feb 24 01:05 .git
--rw-r--r--  1 root root     73 Feb 24 01:03 .gitignore
--rw-r--r--  1 root root    171 Feb 23 23:41 ansible.cfg
--rw-r--r--  1 root root 596049 Feb 24 02:33 ansible.log
-drwxr-xr-x  3 root root    102 Feb 24 01:05 group_vars
--rw-r--r--  1 root root     93 Feb 24 00:59 hosts
--rw-r--r--  1 root root   2058 Feb 24 01:03 labv.yml
-drwxr-xr-x  7 root root    238 Feb 24 02:33 logs
--rw-r--r--  1 root root   3346 Feb 24 01:05 readme.MD
--rw-r--r--  1 root root   2731 Feb 24 01:03 wlc_show_interactive.yml
--rw-r--r--  1 root root   1959 Feb 23 23:41 wlc_show_json.yml
--rw-r--r--  1 root root   2057 Feb 24 01:05 wlc_show_json_vault.yml
--rw-r--r--  1 root root   1659 Feb 24 01:03 wlc_show_lab.yml
-root@0bd4731cb725:/ansible/cisco_wlc# git remote
+root@0bd4731cb725:/ansible/cisco_wlc# tree
+.
+|-- ansible.cfg
+|-- ansible.log
+|-- group_vars
+|   `-- creds.yml
+|-- hosts
+|-- labv.yml
+|-- logs
+|   |-- 10.1.10.123.json
+|   |-- artic-wlc01.json
+|   |-- artic-wlc01.output
+|   |-- artic-wlc01.output_lines
+|   `-- output_directory
+|-- readme.MD
+|-- wlc_show_interactive.yml
+|-- wlc_show_json.yml
+|-- wlc_show_json_vault.yml
+`-- wlc_show_lab.yml
+
 ```
 
 These playbooks utilize the [**aireos_command**](https://docs.ansible.com/ansible/2.4/aireos_command_module.html) module which to date still requires the provider construct.  
