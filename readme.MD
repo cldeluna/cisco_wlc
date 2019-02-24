@@ -37,7 +37,7 @@ These playbooks utilize the [**aireos_command**](https://docs.ansible.com/ansibl
 
 ### Ansible Vault ###
 
-The wlc_show_json_vault.yml playbook incorporates an include file which is an encrypted file containing the required user name and password.  The sample creds.yml file was encrypted using the 'ansible-vault encrypt <filename>' command and given then ansible vault password of 'Cisco123'.  
+The wlc_show_json_vault.yml playbook incorporates an include file which is an encrypted file containing the required user name and password.  The sample creds.yml file was encrypted using the 'ansible-vault encrypt <filename>' command and given the ansible vault password of 'Cisco123'.  
 
 The only modifications to the original json playbook are:
 
