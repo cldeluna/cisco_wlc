@@ -1,0 +1,15 @@
+wlc_show_commands:
+  - show time
+  - show sysinfo
+  - show client state summary
+  - show queue-info
+  - show radius queue summary
+  - show dhcp stats
+  - show arp stats
+  - show coredump summary
+  - show process cpu
+  - show memory summary
+  - show imm chassis fan
+  - show imm chassis temperature
+  - show ap uptime
+  - show ap crash-file
