@@ -3,7 +3,7 @@
 
 The playbooks contained within this repository are examples only.  They are intended to illustrate some basic usage as well as the evolution of a playbook from:
 - an initial playbook with embedded credentials suitable for a lab environment
-- a playbook more suitable for a production environment which uses constructs which anticipate the structured date returned and how it might be used at a later time
+- a playbook more suitable for a production environment which uses constructs which anticipate the structured data returned and how it might be used at a later time
 - a playbook more suitable for a production environment which uses Ansible Vault to protect credentials (Note: this is an interactive playbook)
 - an interactive playbook to showcase including credentials as part of the command line and limiting the target hosts
 
